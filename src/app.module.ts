@@ -1,25 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-// import { UsersModule } from './modules/users/users.module';
-// import { MailerModule } from '@nestjs-modules/mailer';
+import { UsersModule } from './modules/users/users.module';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
-  //   UsersModule,
-  //   MailerModule.forRoot({
-  //     transport: {
-  //       host: process.env.EMAIL_HOST,
-  //       port: 587,
-  //       secure: false,
-  //       auth : {
-  //         user: process.env.EMAIL_USER,
-  //         pass: process.env.EMAIL_PASS,
-  //       },
-  //     },
-  //     defaults: {
-  //       from: `"No Reply" <no-reply@gmail.com>`,
-  //     },
-  //   })
+    UsersModule,
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.EMAIL_HOST,
+        port: 587,
+        secure: false,
+        auth : {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      },
+      defaults: {
+        from: `"No Reply" <no-reply@gmail.com>`,
+      },
+    })
   ],
   controllers: [AppController],
 })

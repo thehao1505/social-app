@@ -16,11 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: sudo docker build -t myapp .
-      - run: sudo docker run -d --name myapp
-          -p 3000:3000
+      - run: sudo docker run -d --name myapp -p 3000:3000
           -e JWT_SECRET=${{ secrets.JWT_SECRET }}
           -e DATABASE_URL=${{ secrets.DATABASE_URL }}
           -e EMAIL_HOST=${{ secrets.EMAIL_HOST }}
           -e EMAIL_USER=${{ secrets.EMAIL_USER }}
           -e EMAIL_PASS=${{ secrets.EMAIL_PASS }}
-          sma:latest
+          myapp:latest

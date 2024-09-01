@@ -112,6 +112,17 @@ export class UsersService {
   }
 
   async signUp(signUpDTO: SignUpDTO) {
+    const userExists = await this.prisma.users.findMany({
+      where: {
+        OR: [
+          { email: signUpDTO.email },
+          { username: signUpDTO.username },
+        ]
+      }
+    })
+
+    if (userExists.length) throw new ForbiddenException('User already exists');
+
     const hashedPassword = await argon.hash(signUpDTO.password);
     const user = await this.prisma.users.create({
       data: {

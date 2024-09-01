@@ -31,7 +31,11 @@ export class UsersController {
     @Body() resetPwDTO: ResetPwDTO,
     @Param() token: string,
   ) {
-    return this.usersService.resetPassword(token, resetPwDTO);
+    try {
+      return this.usersService.resetPassword(token, resetPwDTO);
+    } catch (error) {
+      throw error;      
+    }
   }
 
   @Patch("/change-password")
@@ -52,23 +56,18 @@ export class UsersController {
   @Post("/signup")
   signUp(
     @Body() signUpDTO: SignUpDTO,
-    // @Req() req: Request,
   ): Promise<{accessToken: string}> {
-    return this.usersService.signUp(signUpDTO);
-    // const a = this.usersService.signUp(signUpDTO);
-    // console.log(req);
-    // return a;
+    try {
+      return this.usersService.signUp(signUpDTO);
+    } catch (error) {
+      throw error;      
+    }
   }
   
   @Post("/login")
   login(
     @Body() loginDTO: LoginDTO,
-    @Req() req: Request,
   ): Promise<{accessToken: string}> {
-    // return this.usersService.login(loginDTO);
-    const a = this.usersService.login(loginDTO);
-    console.log(req);
-    return a;
+    return this.usersService.login(loginDTO);
   }
-
 }

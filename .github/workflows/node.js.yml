@@ -28,9 +28,7 @@ jobs:
       - run: sudo docker build -t sma .
       # - run: sudo docker stop myapp
       # - run: sudo docker rm myapp
-      - run: sudo docker run -d --name myapp
-          --env-file ${{ secrets.ENVDEV }}
-          -p 3000:3000 sma:latest
+      - run: sudo docker run -d --name myap --env-file ${{ secrets.ENVDEV }} -p 3000:3000 sma:latest
       # - run:
       #     touch .env
       #     echo "${ secrets.ENVDEV }}" >> .env

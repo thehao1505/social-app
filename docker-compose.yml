@@ -1,17 +1,16 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: sma
     ports:
       - "3000:3000"
     volumes:
       - .:/app
     environment:
-      DATABASE_URL: postgres://postgres:postgres@db:5432/social-app
-      NODE_ENV: development
-      PORT: 3000
-
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      # DATABASE_URL: postgresql://postgres:Abc12345@54.254.6.26:5432/scmedia?schema=public
+      # JWT_SECRET: "myjwtsecret"
+ 
   # db:
   #   image: postgres:13
   #   environment:

@@ -26,10 +26,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      # - run: npm build --if-present
-      # - run:
-      #     touch .env
-      #     echo "${ secrets.ENVDEV }}" >> .env
+      - run: npm build --if-present
+      - run:
+          touch .env
+          echo "${ secrets.ENVDEV }}" >> .env
       # - run: sudo docker build -t sma .
       # - run: sudo docker stop myapp
       # - run: sudo docker rm myapp

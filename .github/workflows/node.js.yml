@@ -13,13 +13,19 @@ jobs:
   build:
     runs-on: self-hosted
 
+    strategy:
+      matrix:
+        node-version: [20.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
       - uses: actions/checkout@v4
-      - run: sudo docker build -t myapp .
-      - run: sudo docker run -d --name myapp -p 3000:3000
-          -e JWT_SECRET=${{ secrets.JWT_SECRET }}
-          -e DATABASE_URL=${{ secrets.DATABASE_URL }}
-          -e EMAIL_HOST=${{ secrets.EMAIL_HOST }}
-          -e EMAIL_USER=${{ secrets.EMAIL_USER }}
-          -e EMAIL_PASS=${{ secrets.EMAIL_PASS }}
-          myapp:latest
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: touch .env
+          echo "${{ secrets.ENVDEV }}" >> .env

@@ -29,8 +29,8 @@ jobs:
       - run: npm run build --if-present
       - run: touch .env
       - run: echo "${{ secrets.ENVDEV }}" >> .env
-      # - run: npx prisma generate
-      # - run: pm2 restart backend-social
+      - run: npx prisma generate
+      - run: pm2 restart backend-social
       # - run: sudo docker build -t sma .
       # - run: sudo docker stop myapp
       # - run: sudo docker rm myapp
